@@ -18,14 +18,11 @@ la disposizione delle pareti nella stanza e cercando di trovare disposizioni cri
 #include <time.h>
 
 
-
 int main(void) {
 
-    srand(time(NULL));
+
 
     char stampa_matrice[16][16];
-
-
 
     scegli_labirinto(stampa_matrice);
 
