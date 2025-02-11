@@ -1,4 +1,3 @@
-
 void scegli_labirinto(char stampa_matrice[16][16]);
 
 void stampa_labirinto_1(char stampa_matrice[16][16]);
