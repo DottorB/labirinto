@@ -11,7 +11,7 @@ void scegli_labirinto(char stampa_matrice[16][16]) {
     printf("Benvenuto nel labirinto del robot! \n");
     printf("IMPORTANTE \nle X sono pareti interne ed esterne ed il robot non ci puo' passare \n");
     printf("I cerchi (O) rappresentano la strada percorribile dal robot \n");
-    printf("al suo passaggio il robot lasciera' dei puntini (.) e non potra' tornare indietro \n");
+    printf("al suo passaggio il robot lasciera' dei puntini (.) e non potra' tornare indietro rispetto al suo ultimo passo \n");
     printf("selezionare un numero da 1 a 3 per scegliere il labirinto \n");
 
     scanf("%d", &opzione);
@@ -38,12 +38,14 @@ void scegli_labirinto(char stampa_matrice[16][16]) {
             break;
         case 3: stampa_labirinto_3(stampa_matrice);
 
-        default: printf("comando non disponibile \n");
+        default: printf("comando non disponibile \n"); scegli_labirinto(stampa_matrice);
+        break;
     }
 }
 
 //primo labirinto, inizializzo tramite due cicli for annidati e una serie di if le posizioni dei muri interni
 void stampa_labirinto_1(char stampa_matrice[16][16]) {
+
     for (int i = 0; i < 16; i++) {
         printf("\n");
 
@@ -52,16 +54,13 @@ void stampa_labirinto_1(char stampa_matrice[16][16]) {
                 stampa_matrice[i][j] = 'X';
             }
 
-
             if (i == 3 && j >= 7 && j <= 15) {
                 stampa_matrice[i][j] = 'X';
             }
 
-
             if (i >= 8 && i <= 15 && j == 7) {
                 stampa_matrice[i][j] = 'X';
             }
-
 
             if (i == 10 && j >= 11 && j <= 13) {
                 stampa_matrice[i][j] = 'X';
@@ -138,24 +137,20 @@ void stampa_labirinto_3(char stampa_matrice[16][16]) {
 int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
     int robot_x = 0, robot_y = 0;
 
-    int scelta = 0;
-    //tramite while impongo al programma di non andare avanti fino a quando non verrà scelta
-    //una posizione valida per il robot
-
-    while (scelta == 0) {
+     {
         //inserisci la coordinata che equivale al numero della colonna dove posizionare il robot
-        printf("inserisci la colonna \n");
+        printf("inserisci in quale delle colonne verra' inserito il robot (1,14) \n");
         scanf("%d", &robot_x);
         //inserisci la coordinata che equivale al numero della colonna dove posizionare il robot
-        printf("inserisci la riga \n");
+        printf("inserisci in quale delle righe verra' inserito il robot (1,14) \n");
         scanf("%d", &robot_y);
         //se la posizione è valida si va avanti altrimenti bisogna rimetterla
         if (robot_x > 0 && robot_x < 16 && robot_y > 0 && robot_y < 16 && stampa_matrice[robot_y][robot_x] == 'O') {
             stampa_matrice[robot_y][robot_x] = 'R';
 
-            scelta = 1;
         } else {
             printf("impossibile posizionare il robot in quella posizione \n");
+            uscita_labirinto(passo, stampa_matrice);
         }
     }
     //variabile che permetterà il riconoscimento del passo precedente per non tornare indietro
