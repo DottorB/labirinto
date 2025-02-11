@@ -92,10 +92,20 @@ void stampa_labirinto_2(char stampa_matrice[16][16]) {
         printf("\n");
 
         for (int j = 0; j < 16; j++) {
-            if ((i == 11 || i == 13) && (j >= 1 && j <= 15)) {
+            if ((i == 10 || i == 14) && (j >= 1 && j <= 15)) {
                 stampa_matrice[i][j] = 'X';
             }
+            if (i>=11 && i<=12 && j==12)
+                stampa_matrice[i][j] = 'X';
+
+            if (i>=12 && i<=13 && j==9)
+                stampa_matrice[i][j] = 'X';
+            if (i>=11 && i<=12 && j>=5 && j<=6)
+                stampa_matrice[i][j] = 'X';
+            if (i>=12 && i<=13 && j==2)
+                stampa_matrice[i][j] = 'X';
             printf("[%c]", stampa_matrice[i][j]);
+
         }
     }
 
@@ -110,16 +120,19 @@ void stampa_labirinto_3(char stampa_matrice[16][16]) {
 
     for (int i = 0; i < 16; i++) {
         printf("\n");
-
         for (int j = 0; j < 16; j++) {
-            if ((i == 12 || i <= 1) && (j >= 1 && j <= 2)) {
-                stampa_matrice[i][j] = 'O';
+            if (i>=2 && i<=10 && j==13)
+                stampa_matrice[i][j] = 'X';
+            if (i==9 && j>=3 && j<=5)
+                stampa_matrice[i][j] = 'X';
+            if (i>=11 && i<=15 && j==8)
+                stampa_matrice[i][j] = 'X';
+            if (i>=1 && i<=3 && j==6)
+                stampa_matrice[i][j] = 'X';
 
-            }
             printf("[%c] ", stampa_matrice[i][j]);
+            }
         }
-    }
-
     printf("\n");
 
     int passo = 0;
@@ -128,7 +141,7 @@ void stampa_labirinto_3(char stampa_matrice[16][16]) {
 }
 
 
-void uscita_labirinto(int passo, char stampa_matrice[16][16]) {
+int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
     int robot_x = 0, robot_y = 0;
 
     int scelta = 0;
@@ -328,6 +341,20 @@ void uscita_labirinto(int passo, char stampa_matrice[16][16]) {
 
 
     printf("il robot e' uscito dal labirinto! \n");
+
+    int continuo;
+
+    printf("premere 1 se si vuole continuare premere 0 se si vuole terminare il programma \n");
+    scanf("%d", &continuo);
+
+    if (continuo == 1) {
+       scegli_labirinto(stampa_matrice);
+
+  }
+    else if (continuo == 0) {
+
+        return 0;
+    }
 }
 
 
