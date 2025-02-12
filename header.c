@@ -37,6 +37,7 @@ void scegli_labirinto(char stampa_matrice[16][16]) {
         case 2: stampa_labirinto_2(stampa_matrice);
             break;
         case 3: stampa_labirinto_3(stampa_matrice);
+            break;
 
         default: printf("comando non disponibile \n"); scegli_labirinto(stampa_matrice);
         break;
@@ -259,8 +260,7 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
             }
 
 
-            if (miglior_distanza == 0 && (robot_y + 1 < 16) && (
-                    stampa_matrice[robot_y + 1][robot_x] == 'O' || stampa_matrice[robot_y + 1][robot_x] == '.' ||
+            if (miglior_distanza == 0 && (robot_y + 1 < 16) || (
                     stampa_matrice[robot_y + 1][robot_x] == 'E') && passo_precedente != 1) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_y++;
@@ -268,7 +268,6 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 passo_precedente = 0;
                 stampa_percorso(stampa_matrice);
             } else if (miglior_distanza == 1 && (robot_y - 1 < 16) && (
-                           stampa_matrice[robot_y - 1][robot_x] == 'O' || stampa_matrice[robot_y - 1][robot_x] == '.' ||
                            stampa_matrice[robot_y - 1][robot_x] == 'E') && passo_precedente != 0) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_y--;
@@ -276,7 +275,6 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 passo_precedente = 1;
                 stampa_percorso(stampa_matrice);
             } else if (miglior_distanza == 2 && (robot_x + 1 < 16) && (
-                           stampa_matrice[robot_y][robot_x + 1] == 'O' || stampa_matrice[robot_y][robot_x + 1] == '.' ||
                            stampa_matrice[robot_y][robot_x + 1] == 'E') && passo_precedente != 3) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_x++;
@@ -284,7 +282,6 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 passo_precedente = 2;
                 stampa_percorso(stampa_matrice);
             } else if (miglior_distanza == 3 && (robot_x + 1 < 16) && (
-                           stampa_matrice[robot_y][robot_x - 1] == 'O' || stampa_matrice[robot_y][robot_x - 1] == '.' ||
                            stampa_matrice[robot_y][robot_x - 1] == 'E') && passo_precedente != 2) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_x--;
@@ -338,21 +335,23 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
     } while (!(
         (robot_y == 11 && robot_x == 0) ||
         (robot_y == 12 && robot_x == 0) ||
-        (robot_y == 13 && robot_x == 0)
-    ));
+        (robot_y == 13 && robot_x == 0)));
 
 
     printf("il robot e' uscito dal labirinto! \n");
 
-    int continuo;
+    int continuo=0;
     //permette di continuare una che il robot ha finito di percorrere un labirinto
     printf("premere 1 se si vuole continuare premere 0 se si vuole terminare il programma \n");
 
     scanf("%d", &continuo);
 
+
+//DA CONTROLLARE NON FUNZIONA BENE
     if (continuo == 1) {
         scegli_labirinto(stampa_matrice);
-    } else {
+    }
+    else {
         return 0;
     }
 }
