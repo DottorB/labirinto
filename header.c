@@ -346,8 +346,6 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
 
     scanf("%d", &continuo);
 
-
-//DA CONTROLLARE NON FUNZIONA BENE
     if (continuo == 1) {
         scegli_labirinto(stampa_matrice);
     }
