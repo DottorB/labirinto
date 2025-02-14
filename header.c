@@ -38,13 +38,13 @@ void scegli_labirinto(char stampa_matrice[16][16]) {
             break;
         case 3: stampa_labirinto_3(stampa_matrice);
             break;
-
+        //se si dovesse digitare un numero sbagliato si visualizzerà un messaggio d'errore
         default: printf("comando non disponibile \n"); scegli_labirinto(stampa_matrice);
         break;
     }
 }
 
-//primo labirinto, inizializzo tramite due cicli for annidati e una serie di if le posizioni dei muri interni
+//primo labirinto, si inizializzano tramite due cicli for annidati e una serie di if le posizioni dei muri interni
 void stampa_labirinto_1(char stampa_matrice[16][16]) {
 
     for (int i = 0; i < 16; i++) {
@@ -66,7 +66,7 @@ void stampa_labirinto_1(char stampa_matrice[16][16]) {
             if (i == 10 && j >= 11 && j <= 13) {
                 stampa_matrice[i][j] = 'X';
             }
-            //tramite printf stampo il labirinto completo visibile all'utente
+            //tramite printf viene stampato il labirinto completo visibile all'utente
             printf("[%c]", stampa_matrice[i][j]);
         }
     }
@@ -75,11 +75,11 @@ void stampa_labirinto_1(char stampa_matrice[16][16]) {
 
     int passo = 0;
 
-    //richiamo della funzione di uscita, cioè di tutto il percorso del robot fino a 'E'
+    //vengono richiamate della funzione di uscita, cioè di tutto il percorso del robot fino a 'E'
     uscita_labirinto(passo, stampa_matrice);
 }
 
-//secondo labirinto, inizializzo tramite due cicli for annidati e una serie di if le posizioni dei muri interni
+//secondo labirinto, viene inizializzato tramite due cicli for annidati e una serie di if le posizioni dei muri interni
 void stampa_labirinto_2(char stampa_matrice[16][16]) {
     for (int i = 0; i < 16; i++) {
         printf("\n");
@@ -97,7 +97,7 @@ void stampa_labirinto_2(char stampa_matrice[16][16]) {
                 stampa_matrice[i][j] = 'X';
             if (i >= 12 && i <= 13 && j == 2)
                 stampa_matrice[i][j] = 'X';
-            //tramite printf stampo il labirinto completo visibile all'utente
+            //tramite printf viene stampato il labirinto completo visibile all'utente
             printf("[%c]", stampa_matrice[i][j]);
         }
     }
@@ -105,11 +105,11 @@ void stampa_labirinto_2(char stampa_matrice[16][16]) {
     printf("\n");
 
     int passo = 0;
-    //richiamo della funzione di uscita, cioè di tutto il percorso del robot fino a 'E'
+    //chiamata della funzione di uscita, che si occupa di tutto il percorso del robot fino a 'E'
     uscita_labirinto(passo, stampa_matrice);
 }
 
-//terzo labirinto, inizializzo tramite due cicli for annidati e una serie di if le posizioni dei muri interni
+//terzo labirinto, viene inizializzato tramite due cicli for annidati e una serie di if le posizioni dei muri interni
 void stampa_labirinto_3(char stampa_matrice[16][16]) {
     for (int i = 0; i < 16; i++) {
         printf("\n");
@@ -122,14 +122,14 @@ void stampa_labirinto_3(char stampa_matrice[16][16]) {
                 stampa_matrice[i][j] = 'X';
             if (i >= 1 && i <= 3 && j == 6)
                 stampa_matrice[i][j] = 'X';
-            //tramite printf stampo il labirinto completo visibile all'utente
+            //tramite printf viene stampato il labirinto completo visibile all'utente
             printf("[%c] ", stampa_matrice[i][j]);
         }
     }
     printf("\n");
 
     int passo = 0;
-    //richiamo della funzione di uscita, cioè di tutto il percorso del robot fino a 'E'
+    //chiamata alla funzione di uscita, cioè di tutto il percorso del robot fino a 'E'
     uscita_labirinto(passo, stampa_matrice);
 }
 
@@ -139,10 +139,10 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
     int robot_x = 0, robot_y = 0;
 
      {
-        //inserisci la coordinata che equivale al numero della colonna dove posizionare il robot
+        //si inserisce la coordinata che equivale al numero della colonna dove posizionare il robot
         printf("inserisci in quale delle colonne verra' inserito il robot (1,14) \n");
         scanf("%d", &robot_x);
-        //inserisci la coordinata che equivale al numero della colonna dove posizionare il robot
+        //si inserisce la coordinata che equivale al numero della colonna dove posizionare il robot
         printf("inserisci in quale delle righe verra' inserito il robot (1,14) \n");
         scanf("%d", &robot_y);
         //se la posizione è valida si va avanti altrimenti bisogna rimetterla
@@ -158,7 +158,7 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
     int passo_precedente = -1;
 
     int risultato_p;
-    //con il do sceglie tutte le opzioni per ogni singolo passo permettendogli di stampare
+    //con il "do" il programma sceglie tutte le opzioni per ogni singolo passo permettendogli di stampare
     //il labirinto e ogni passo fino a 'E'
     do {
         //rand permette di scegliere casualmente un numero da 1 a 100
@@ -169,13 +169,12 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
             //inizializza un passo casuale tra i 4
             passo = rand() % 4;
 
-            printf("%d\n", passo);
-
-            //inizializzo le varie condizioni per cui è possibile posizionare il robot, evitando anche di tornare indietro
-            //rispetto al suo ultimo passo, mettendo una R nella sua posizione corrente e un . per la sua posizione precedente
-            if (passo == 0 && (robot_y + 1 < 16) && (
+            //Inizializza le varie condizioni per cui è possibile posizionare il robot, evitando anche di tornare indietro
+            //rispetto al suo ultimo passo, mettendo una R nella sua posizione corrente e un "." per la sua posizione precedente
+            if (passo == 0 && (robot_y + 1 < 15) && (
                     stampa_matrice[robot_y + 1][robot_x] == 'O' || stampa_matrice[robot_y + 1][robot_x] == '.' ||
-                    stampa_matrice[robot_y + 1][robot_x] == 'E') && passo_precedente != 1) {
+                    stampa_matrice[robot_y + 1][robot_x] == 'E') && passo_precedente != 1)//giu
+                        {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_y++;
                 stampa_matrice[robot_y][robot_x] = 'R';
@@ -190,7 +189,7 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 stampa_matrice[robot_y][robot_x] = 'R';
                 passo_precedente = 1;
                 stampa_percorso(stampa_matrice);
-            } else if (passo == 2 && (robot_x + 1 < 16) && (
+            } else if (passo == 2 && (robot_x + 1 < 15) && (
                            stampa_matrice[robot_y][robot_x + 1] == 'O' || stampa_matrice[robot_y][robot_x + 1] == '.' ||
                            stampa_matrice[robot_y][robot_x + 1] == 'E') && passo_precedente != 3) //destra
             {
@@ -209,14 +208,14 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 passo_precedente = 3;
                 stampa_percorso(stampa_matrice);
             }
-            //tramite else if avvio la seconda condizione, quindi la generazione di numeri casuali da 31 a 100
+            //tramite else if viene avviata la seconda condizione, quindi la generazione di numeri casuali da 31 a 100
             //il 70% dei casi
         } else if (risultato_p >= 31 && risultato_p <= 100) {
             int max_distanza = -1, miglior_distanza = -1;
             int distanze[4] = {0, 0, 0, 0};
             int temp_giu = robot_y + 1, temp_su = robot_y - 1, temp_destra = robot_x + 1, temp_sinistra = robot_x - 1;
-            //tramite while faccio "vedere" al robot sla direzione più lunga aumentando 4 variabili di un array
-            while (temp_giu < 16 && stampa_matrice[temp_giu][robot_x] != 'X') {
+            //tramite while il robot "vede" la direzione più lunga aumentando 4 variabili di un array
+            while (temp_giu < 15 && stampa_matrice[temp_giu][robot_x] != 'X') {
                 distanze[0]++;
                 temp_giu++;
             }
@@ -226,7 +225,7 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 temp_su--;
             }
 
-            while (temp_destra < 16 && stampa_matrice[robot_y][temp_destra] != 'X') {
+            while (temp_destra < 15 && stampa_matrice[robot_y][temp_destra] != 'X') {
                 distanze[2]++;
                 temp_destra++;
             }
@@ -236,52 +235,51 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
             }
             int i = 0, contatore = 0;
             int direzioni_massime[4];
-            //se una delle 4 direzioni è più grande delle altre sceglie quella
+            //sceglie la direzione più lunga
 
             for (i = 0; i < 4; i++) {
                 if (distanze[i] > max_distanza && i != passo_precedente) {
                     max_distanza = distanze[i];
 
                     miglior_distanza = i;
-                    //se ci soo due o più valori uguali e maggiori degli altri sceglie a caso quale dei valori più grandi predere
+                    //se ci sono due o più valori uguali e maggiori degli altri sceglie a caso uno tra i valori più grandi
                 } else if (distanze[i] == max_distanza && i != passo_precedente) {
                     direzioni_massime[contatore] = i;
 
                     contatore++;
                 }
-                printf("%d e %d \n", distanze[i], miglior_distanza);
-            }
+            }//se ci sono due o più direzioni con il percorso maggiore ne sceglie una casuale tra quelle
             if (contatore > 1) {
                 int scelta_casuale;
 
                 scelta_casuale = rand() % contatore;
 
-                miglior_distanza = scelta_casuale;
+                miglior_distanza = direzioni_massime[scelta_casuale];
             }
 
 
-            if (miglior_distanza == 0 && (robot_y + 1 < 16) || (
+            if (miglior_distanza == 0 && (robot_y + 1 < 15) || (
                     stampa_matrice[robot_y + 1][robot_x] == 'E') && passo_precedente != 1) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_y++;
                 stampa_matrice[robot_y][robot_x] = 'R';
                 passo_precedente = 0;
                 stampa_percorso(stampa_matrice);
-            } else if (miglior_distanza == 1 && (robot_y - 1 < 16) && (
+            } else if (miglior_distanza == 1 && (robot_y - 1 < 15) && (
                            stampa_matrice[robot_y - 1][robot_x] == 'E') && passo_precedente != 0) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_y--;
                 stampa_matrice[robot_y][robot_x] = 'R';
                 passo_precedente = 1;
                 stampa_percorso(stampa_matrice);
-            } else if (miglior_distanza == 2 && (robot_x + 1 < 16) && (
+            } else if (miglior_distanza == 2 && (robot_x + 1 < 15) && (
                            stampa_matrice[robot_y][robot_x + 1] == 'E') && passo_precedente != 3) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_x++;
                 stampa_matrice[robot_y][robot_x] = 'R';
                 passo_precedente = 2;
                 stampa_percorso(stampa_matrice);
-            } else if (miglior_distanza == 3 && (robot_x + 1 < 16) && (
+            } else if (miglior_distanza == 3 && (robot_x + 1 < 15) && (
                            stampa_matrice[robot_y][robot_x - 1] == 'E') && passo_precedente != 2) {
                 stampa_matrice[robot_y][robot_x] = '.';
                 robot_x--;
@@ -290,11 +288,11 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 stampa_percorso(stampa_matrice);
             }
             int movimento_effettuato = 0;
-            //se il robot non è riuscito a muoversi perché il movimento non è valido vede quale alternativa può fare
+            //se il robot non è riuscito a muoversi perché il movimento non è valido vede, sceglie un'altra direzione casualmente
 
             for (int tentativo = 0; tentativo < 4 && !movimento_effettuato; tentativo++) {
                 int direzione_attuale = (miglior_distanza + tentativo) % 4;
-                if (direzione_attuale == 0 && (robot_y + 1 < 16) && (
+                if (direzione_attuale == 0 && (robot_y + 1 < 15) && (
                         stampa_matrice[robot_y + 1][robot_x] == 'O' || stampa_matrice[robot_y + 1][robot_x] == '.' ||
                         stampa_matrice[robot_y + 1][robot_x] == 'E') && passo_precedente != 1) {
                     stampa_matrice[robot_y][robot_x] = '.';
@@ -310,7 +308,7 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                     stampa_matrice[robot_y][robot_x] = 'R';
                     passo_precedente = 1;
                     movimento_effettuato = 1;
-                } else if (direzione_attuale == 2 && (robot_x + 1 < 16) && (
+                } else if (direzione_attuale == 2 && (robot_x + 1 < 15) && (
                                stampa_matrice[robot_y][robot_x + 1] == 'O' || stampa_matrice[robot_y][robot_x + 1] ==
                                '.' || stampa_matrice[robot_y][robot_x + 1] == 'E') && passo_precedente != 3) {
                     stampa_matrice[robot_y][robot_x] = '.';
@@ -329,27 +327,29 @@ int uscita_labirinto(int passo, char stampa_matrice[16][16]) {
                 }
             }
         }
-        //richiama la variabile di stampa, ad ogni passo verrà stampato il labirinto e il passo aggiornato
-        stampa_percorso(stampa_matrice);
-        //aggiornerà i passi fino all'uscita
+
     } while (!(
         (robot_y == 11 && robot_x == 0) ||
         (robot_y == 12 && robot_x == 0) ||
         (robot_y == 13 && robot_x == 0)));
 
 
+    stampa_percorso(stampa_matrice);
+    //messaggio visualizzato dall'utente che lo avvisa del completamento de labirinto da parte del robot
     printf("il robot e' uscito dal labirinto! \n");
 
     int continuo=0;
-    //permette di continuare una che il robot ha finito di percorrere un labirinto
-    printf("premere 1 se si vuole continuare premere 0 se si vuole terminare il programma \n");
+    //permette di continuare una volta che il robot ha finito di percorrere un labirinto
+    printf("premere 1 se si vuole continuare premere qualsiasi altro numero se si vuole terminare il programma \n");
 
     scanf("%d", &continuo);
-
+    //se si digita 1 continua, si torna alla procedura scegli_labirinto, in caso contrario termina il programma
     if (continuo == 1) {
         scegli_labirinto(stampa_matrice);
     }
-    else {
+
+    else  {
+
         return 0;
     }
 }

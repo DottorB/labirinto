@@ -11,7 +11,7 @@
 int main(void) {
     //servirà per la generazione di numeri casuali per il percorso del robot
     srand(time(NULL));
-    //il labirinto formato da 16 righe e 16 colonne
+    //array che formerà labirinto formato da 16 righe e 16 colonne
     char stampa_matrice[16][16];
 
     scegli_labirinto(stampa_matrice);
